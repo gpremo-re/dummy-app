@@ -5,9 +5,28 @@ pipeline {
         }
     }
     stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from Git repository
+                git branch: 'main',
+                url: 'https://github.com/gpremo-re/dummy-app.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
         stage('Build') {
             steps {
-                sh 'node -v'
+                dir('frontend') {
+                    sh 'npm run build -c=production'
+                }
+            }
+            post {
+                success {
+                    archiveArtifacts 'frontend/.dist'
+                }
             }
         }
     }
