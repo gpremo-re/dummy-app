@@ -1,5 +1,5 @@
 Started by user [8mha:////4E92G6oFJGyph4j3qCsfGAwSgYDHzaoYkBn75M9WgLueAAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYe/dLi1CL99IKi1Nx8AOOmWbvBAAAA[0mGarret Premo
-[Thu Nov 30 23:12:10 UTC 2023] Starting branch indexing...
+[Thu Nov 30 23:12:51 UTC 2023] Starting branch indexing...
  > git --version # timeout=10
  > git --version # 'git version 2.39.2'
  > git ls-remote --symref -- https://github.com/gpremo-re/dummy-app.git # timeout=10
@@ -17,10 +17,9 @@ Fetching upstream changes from origin
  > git fetch --tags --force --progress --prune -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
 Checking branches...
   Checking branch main
-      ‘jenkins/multibranch/Jenkinsfile’ not found
-    Does not meet criteria
+      ‘jenkins/multibranch/Jenkinsfile’ found
+    Met criteria
+No changes detected: main (still at 7021f2975c544fae8d61f0bb7d20f89ed169ea85)
 Processed 1 branches
-[Thu Nov 30 23:12:11 UTC 2023] Finished branch indexing. Indexing took 1.5 sec
-Evaluating orphaned items in test-multibranch
-Will remove main
+[Thu Nov 30 23:12:52 UTC 2023] Finished branch indexing. Indexing took 1.2 sec
 Finished: SUCCESS
