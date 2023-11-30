@@ -33,6 +33,9 @@
           <credentialsId></credentialsId>
           <traits>
             <jenkins.plugins.git.traits.BranchDiscoveryTrait/>
+            <jenkins.scm.impl.trait.RegexSCMHeadFilterTrait plugin="scm-api@683.vb_16722fb_b_80b_">
+              <regex>main</regex>
+            </jenkins.scm.impl.trait.RegexSCMHeadFilterTrait>
           </traits>
         </source>
         <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
@@ -44,6 +47,6 @@
   </sources>
   <factory class="org.jenkinsci.plugins.workflow.multibranch.WorkflowBranchProjectFactory">
     <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
-    <scriptPath>jenkins/Jenkinsfile-Multibranch</scriptPath>
+    <scriptPath>jenkins/multibranch/Jenkinsfile</scriptPath>
   </factory>
 </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>

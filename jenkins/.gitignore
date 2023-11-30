@@ -3,3 +3,4 @@ configuration/*
 !configuration/jobs
 
 configuration/jobs/*/builds
+configuration/jobs/*/branches/main/builds
