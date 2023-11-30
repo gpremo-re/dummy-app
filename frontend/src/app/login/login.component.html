@@ -1,0 +1,13 @@
+<form role="form" (submit)="login()" [formGroup]="form">
+    <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username"/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password"/>
+    </mat-form-field>
+    <footer>
+        <button mat-flat-button color="secondary" [disabled]="form.invalid">Submit</button>
+    </footer>
+</form>

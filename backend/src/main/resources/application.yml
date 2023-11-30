@@ -1,0 +1,14 @@
+---
+logging:
+    level:
+        root: INFO
+        org:
+            springframework:
+                web: DEBUG
+
+server:
+    servlet:
+        session:
+            cookie:
+                same-site: "none"
+                secure: true

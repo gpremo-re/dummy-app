@@ -1,0 +1,9 @@
+#src
+.angular
+node_modules
+
+Dockerfile
+.dockerignore
+.gitignore
+README.md
+
