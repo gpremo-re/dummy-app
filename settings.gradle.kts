@@ -1,1 +1,1 @@
-include("server")
+rootProject.name = "dummy-app"

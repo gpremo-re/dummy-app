@@ -5,8 +5,14 @@
 /tmp
 /out-tsc
 /bazel-out
-backend/src/main/webapp
-backend/src/main/resources/static
+/build
+/out
+src/main/webapp
+src/main/resources/static
+
+# Jenkins
+jenkins/configuration
+jenkins/run
 
 # Node
 frontend/node_modules
