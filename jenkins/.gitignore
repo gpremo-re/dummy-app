@@ -4,3 +4,4 @@ configuration/*
 
 configuration/jobs/*/builds
 configuration/jobs/*/branches/
+configuration/jobs/*/indexing/
