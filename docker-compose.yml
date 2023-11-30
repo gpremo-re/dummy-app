@@ -1,0 +1,34 @@
+services:
+    frontend:
+        container_name: test-frontend
+        build: ./frontend
+        ports:
+            - "4200:4200"
+        develop:
+            watch:
+                - action: rebuild
+                  path: ./frontend
+                  target: /app
+                  ignore:
+                      - ./frontend/src
+
+                - action: sync
+                  path: ./frontend/src
+                  target: /app/src
+
+    backend:
+        container_name: test-backend
+        build:
+            context: .
+            args:
+                IMAGE: ${BACKEND_IMAGE}
+        expose:
+            - "8080"
+        develop:
+            watch:
+                - action: rebuild
+                  path: build.gradle.kts
+
+                - action: rebuild
+                  path: ./src
+                  target: /app/src

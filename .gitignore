@@ -10,10 +10,6 @@
 src/main/webapp
 src/main/resources/static
 
-# Jenkins
-jenkins/configuration
-jenkins/run
-
 # Node
 frontend/node_modules
 frontend/npm-debug.log

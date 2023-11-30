@@ -9,4 +9,4 @@ services:
         container_name: jenkins
         volumes:
             - ./configuration:/var/jenkins_home
-            - ./run/docker.sock:/var/run/docker.sock
+            - /usr/local/bin/docker:/usr/bin/docker

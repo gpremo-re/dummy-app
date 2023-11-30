@@ -1,0 +1,5 @@
+run/
+configuration/*
+!configuration/jobs
+
+configuration/jobs/*/builds
