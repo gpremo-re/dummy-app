@@ -13,6 +13,7 @@ pipeline {
             }
         }
         stage('Install Dependencies') {
+            when { changeset 'frontend/package.json' }
             steps {
                 dir('frontend') {
                     sh 'npm install'
@@ -20,6 +21,14 @@ pipeline {
             }
         }
         stage('Build') {
+            when {
+                anyOf {
+                    changeset 'frontend/src/**'
+                    changeset 'frontend/angular.json'
+                    changeset 'tsconfig.app.json'
+                    changeset 'tsconfig.json'
+                }
+            }
             steps {
                 dir('frontend') {
                     sh 'npm run build -c=production'
