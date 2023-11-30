@@ -28,6 +28,8 @@ frontend/yarn-error.log
 .settings/
 *.sublime-workspace
 
+.gradle
+
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json
