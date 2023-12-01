@@ -1,0 +1,76 @@
+Started by user [8mha:////4CnjxJS+d/ZcfbKT3j/yag4zrApPKLPdWDUxtpenscYpAAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYe/dLi1CL99IKi1Nx8AOOmWbvBAAAA[0mGarret Premo
+Checking out git https://github.com/gpremo-re/dummy-app.git into /var/jenkins_home/jobs/build/jobs/build-all/workspace@script/2fc50c7c729dfef37b9925157809542af917f2a40a9d58b239b7a49002e2477e to read jenkins/jobs/build/Jenkinsfile
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/jobs/build/jobs/build-all/workspace@script/2fc50c7c729dfef37b9925157809542af917f2a40a9d58b239b7a49002e2477e/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/gpremo-re/dummy-app.git # timeout=10
+Fetching upstream changes from https://github.com/gpremo-re/dummy-app.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+ > git fetch --tags --force --progress -- https://github.com/gpremo-re/dummy-app.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/main^{commit} # timeout=10
+Checking out Revision 5cd358f3bee66588ad015286bdb9241d8216e974 (origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 5cd358f3bee66588ad015286bdb9241d8216e974 # timeout=10
+Commit message: "update build-all pipeline"
+ > git rev-list --no-walk 7267dceb7539ce3fc4190a381ff5335cfa37f6f4 # timeout=10
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+WorkflowScript: 24: Unknown stage section "copyArtifacts". Starting with version 0.5, steps in a stage must be in a ‘steps’ block. @ line 24, column 9.
+           stage ('Copy Artifacts') {
+           ^
+
+WorkflowScript: 24: Multiple occurrences of the copyArtifacts section @ line 24, column 9.
+           stage ('Copy Artifacts') {
+           ^
+
+WorkflowScript: 24: Unknown stage section "copyArtifacts". Starting with version 0.5, steps in a stage must be in a ‘steps’ block. @ line 24, column 9.
+           stage ('Copy Artifacts') {
+           ^
+
+WorkflowScript: 45: Expected a step @ line 45, column 36.
+                           artifacts: 'build/libs/*.jar'
+                                      ^
+
+WorkflowScript: 46: Expected a step @ line 46, column 33.
+                           target: './build/libs/'
+                                   ^
+
+WorkflowScript: 49: Expected a step @ line 49, column 36.
+                           artifacts: 'build/resolvedMainClassName'
+                                      ^
+
+WorkflowScript: 50: Expected a step @ line 50, column 33.
+                           target: './build'
+                                   ^
+
+WorkflowScript: 24: Expected one of "steps", "stages", or "parallel" for stage "Copy Artifacts" @ line 24, column 9.
+           stage ('Copy Artifacts') {
+           ^
+
+WorkflowScript: 44: Missing required parameter: "artifacts" @ line 44, column 21.
+                       archiveArtifacts {
+                       ^
+
+WorkflowScript: 48: Missing required parameter: "artifacts" @ line 48, column 21.
+                       archiveArtifacts {
+                       ^
+
+10 errors
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:309)
+	at org.codehaus.groovy.control.CompilationUnit.applyToPrimaryClassNodes(CompilationUnit.java:1107)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:624)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:602)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:579)
+	at groovy.lang.GroovyClassLoader.doParseClass(GroovyClassLoader.java:323)
+	at groovy.lang.GroovyClassLoader.parseClass(GroovyClassLoader.java:293)
+	at org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.GroovySandbox$Scope.parse(GroovySandbox.java:163)
+	at org.jenkinsci.plugins.workflow.cps.CpsGroovyShell.doParse(CpsGroovyShell.java:190)
+	at org.jenkinsci.plugins.workflow.cps.CpsGroovyShell.reparse(CpsGroovyShell.java:175)
+	at org.jenkinsci.plugins.workflow.cps.CpsFlowExecution.parseScript(CpsFlowExecution.java:635)
+	at org.jenkinsci.plugins.workflow.cps.CpsFlowExecution.start(CpsFlowExecution.java:581)
+	at org.jenkinsci.plugins.workflow.job.WorkflowRun.run(WorkflowRun.java:335)
+	at hudson.model.ResourceController.execute(ResourceController.java:101)
+	at hudson.model.Executor.run(Executor.java:442)
+Finished: FAILURE
