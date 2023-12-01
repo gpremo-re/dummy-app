@@ -1,0 +1,33 @@
+pipeline {
+    agent {
+        dockerfile {
+            dir 'jenkins/jobs/backend'
+        }
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from Git repository
+                git branch: 'main',
+                url: 'https://github.com/gpremo-re/dummy-app.git'
+            }
+        }
+        stage('Build') {
+            when {
+                anyOf {
+                    changeset 'build.gradle.kts'
+                    changeset 'src/main/java'
+                    changeset 'src/main/resources'
+                }
+            }
+            steps {
+                sh './gradlew clean assemble'
+            }
+            post {
+                success {
+                    archiveArtifacts 'build/libs/*.jar'
+                }
+            }
+        }
+    }
+}
