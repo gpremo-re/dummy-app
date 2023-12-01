@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        dockerfile {
-            dir 'jenkins/jobs/backend'
-        }
-    }
+    agent any
     stages {
         stage ('Build App') {
             parallel {
@@ -21,6 +17,37 @@ pipeline {
                             job       : 'build-backend',
                             wait      : true
                         ])
+                    }
+                }
+            }
+        }
+        stage ('Copy Artifacts') {
+            copyArtifacts(
+                projectName: 'build-backend',
+                selector: artifactSelector,
+                target: '.',
+                fingerprintArtifacts: true
+            )
+            copyArtifacts(
+                projectName: 'build-frontend',
+                selector: artifactSelector,
+                target: './build/resources/static'
+            )
+        }
+        stage ('Assemble Jar') {
+            steps {
+                sh 'chmod +x ./gradlew'
+                sh './gradlew clean assemble'
+            }
+            post {
+                success {
+                    archiveArtifacts {
+                        artifacts: 'build/libs/*.jar'
+                        target: './build/libs/'
+                    }
+                    archiveArtifacts {
+                        artifacts: 'build/resolvedMainClassName'
+                        target: './build'
                     }
                 }
             }

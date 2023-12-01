@@ -34,7 +34,7 @@
       <submoduleCfg class="empty-list"/>
       <extensions/>
     </scm>
-    <scriptPath>jenkins/jobs/deploy/Jenkinsfile</scriptPath>
+    <scriptPath>jenkins/jobs/build/Jenkinsfile</scriptPath>
     <lightweight>false</lightweight>
   </definition>
   <triggers/>

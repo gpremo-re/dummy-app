@@ -23,11 +23,11 @@ pipeline {
 //            }
             steps {
                 sh 'chmod +x ./gradlew'
-                sh './gradlew clean assemble'
+                sh './gradlew clean compileJava'
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'build/libs/*.jar' 'build/resolvedMainClassName' ''
+                    archiveArtifacts artifacts: 'build/' 'settings.gradle.kts' 'build.gradle.kts' 'gradlew' 'gradle/' '.gradle/'
                 }
             }
         }
