@@ -4,6 +4,9 @@ pipeline {
             dir 'jenkins/jobs/frontend'
         }
     }
+    parameters {
+        booleanParam(name: 'reuse_artifacts', defaultValue: true, description: 'Reuse old artifact when no changes are detected')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -28,6 +31,7 @@ pipeline {
         stage('Build') {
             when {
                 anyOf {
+                    expression { params.reuse_artifacts == false }
                     expression { currentBuild.previousCompletedBuild == null }
                     changeset 'frontend/src/**'
                     changeset 'frontend/angular.json'

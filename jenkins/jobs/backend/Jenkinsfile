@@ -23,7 +23,7 @@ pipeline {
            }
             steps {
                 sh 'chmod +x ./gradlew'
-                sh './gradlew clean compileJava'
+                sh './gradlew clean compileJava --no-daemon'
             }
             post {
                 success {
