@@ -43,8 +43,8 @@ pipeline {
         }
         stage('Reuse Previous Artifact') {
             when {
-                dir('frontend/dist') {
-                    !findFiles().any()
+                expression {
+                    dir('frontend/dist') { !findFiles().any() }
                 }
             }
             steps {
