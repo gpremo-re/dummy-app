@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        dockerfile {
+            dir 'jenkins/jobs/backend'
+        }
+    }
+    stages {
+        stage ('Build App') {
+            parallel {
+                stage ('Build Frontend') {
+                    steps {
+                        build([
+                            job       : 'build-frontend',
+                            wait      : true,
+                        ])
+                    }
+                }
+                stage ('Build Backend') {
+                    steps {
+                        build([
+                            job       : 'build-backend',
+                            wait      : true
+                        ])
+                    }
+                }
+            }
+        }
+    }
+}
+
