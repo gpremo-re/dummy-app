@@ -13,7 +13,12 @@ pipeline {
             }
         }
         stage('Install Dependencies') {
-            when { changeset 'frontend/package.json' }
+            when {
+                anyOf {
+                    expression { currentBuild.previousCompletedBuild == null }
+                    changeset 'frontend/package.json'
+                }
+            }
             steps {
                 dir('frontend') {
                     sh 'npm install'
@@ -23,6 +28,7 @@ pipeline {
         stage('Build') {
             when {
                 anyOf {
+                    expression { currentBuild.previousCompletedBuild == null }
                     changeset 'frontend/src/**'
                     changeset 'frontend/angular.json'
                     changeset 'tsconfig.app.json'

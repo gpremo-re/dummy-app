@@ -15,9 +15,10 @@ pipeline {
         stage('Build') {
             when {
                 anyOf {
+                    expression { currentBuild.previousCompletedBuild == null }
                     changeset 'build.gradle.kts'
-                    changeset 'src/main/java'
-                    changeset 'src/main/resources'
+                    changeset 'src/main/java/**'
+                    changeset 'src/main/resources/**'
                 }
             }
             steps {
