@@ -42,7 +42,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts 'frontend/.dist'
+                    archiveArtifacts 'frontend/dist'
                 }
             }
         }
