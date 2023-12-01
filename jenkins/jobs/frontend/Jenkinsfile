@@ -41,28 +41,29 @@ pipeline {
                 }
             }
         }
-        stage('Reuse Previous Artifact') {
-            when {
-                allOf {
-                    expression {
-                        dir('frontend/dist') { !findFiles().any() }
-                    }
-                    expression { previousCompletedBuild != null }
-                }
-            }
-            steps {
-                // Copy artifacts
-                script {
-                    step ([$class: 'CopyArtifact',
-                           projectName: currentBuild.projectName,
-                           selector: specific("${currentBuild.previousCompletedBuild.number}"),
-                           target: '.frontend/dist' ])
-                }
-        }
+//         stage('Reuse Previous Artifact') {
+//             when {
+//                 allOf {
+//                     expression {
+//                         dir('frontend/dist') { !findFiles().any() }
+//                     }
+//                     expression { previousCompletedBuild != null }
+//                 }
+//             }
+//             steps {
+//                 // Copy artifacts
+//                 script {
+//                     step ([$class: 'CopyArtifact',
+//                            projectName: currentBuild.projectName,
+//                            selector: specific("${currentBuild.previousCompletedBuild.number}"),
+//                            target: '.frontend/dist' ])
+//                 }
+//             }
+//         }
     }
     post {
         success {
-            archiveArtifacts artifacts: 'frontend/dist/**'
+            archiveArtifacts artifacts: 'frontend/dist/**', allowEmptyArchive: true
         }
     }
 }
