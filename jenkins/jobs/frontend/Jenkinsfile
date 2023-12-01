@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            dir 'jenkins/multibranch'
+            dir 'jenkins/jobs/frontend'
         }
     }
     stages {

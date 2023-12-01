@@ -48,7 +48,7 @@
     </org.jenkinsci.plugins.workflow.multibranch.BranchJobProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.multibranch.SCMBinder" plugin="workflow-multibranch@756.v891d88f2cd46">
-    <scriptPath>jenkins/multibranch/Jenkinsfile</scriptPath>
+    <scriptPath>jenkins/jobs/frontend/Jenkinsfile</scriptPath>
   </definition>
   <triggers/>
   <disabled>false</disabled>
