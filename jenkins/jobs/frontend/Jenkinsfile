@@ -43,13 +43,21 @@ pipeline {
         }
         stage('Reuse Previous Artifact') {
             when {
-                expression {
-                    dir('frontend/dist') { !findFiles().any() }
+                allOf {
+                    expression {
+                        dir('frontend/dist') { !findFiles().any() }
+                    }
+                    expression { previousCompletedBuild != null }
                 }
             }
             steps {
-                currentBuild.result = "SKIPPED"
-            }
+                // Copy artifacts
+                script {
+                    step ([$class: 'CopyArtifact',
+                           projectName: currentBuild.projectName,
+                           selector: specific("${currentBuild.previousCompletedBuild.number}"),
+                           target: '.frontend/dist' ])
+                }
         }
     }
     post {
