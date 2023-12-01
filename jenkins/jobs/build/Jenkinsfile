@@ -21,8 +21,13 @@ pipeline {
                 }
             }
         }
-        stage ('Copy Artifacts') {
+        stage ('Assemble Jar') {
+            agent {
+                dockerfile { dir 'jenkins/jobs/backend' }
+            }
+
             steps {
+                // Copy artifacts
                 script {
                     step ([$class: 'CopyArtifact',
                            projectName: 'build-backend',
@@ -33,13 +38,8 @@ pipeline {
                            target: './build/resources/static',
                            fingerprintArtifacts: true])
                 }
-            }
-        }
-        stage ('Assemble Jar') {
-            agent {
-                dockerfile { dir 'jenkins/jobs/backend' }
-            }
-            steps {
+
+                // Assemble
                 sh 'chmod +x ./gradlew'
                 sh './gradlew assemble'
             }
