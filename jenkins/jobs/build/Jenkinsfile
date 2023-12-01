@@ -31,12 +31,12 @@ pipeline {
                 script {
                     step ([$class: 'CopyArtifact',
                            projectName: 'build-backend',
-                           selector: 'lastWithArtifacts'
+                           selector: 'lastWithArtifacts',
                            target: '.',
                            fingerprintArtifacts: true])
                     step ([$class: 'CopyArtifact',
                            projectName: 'build-frontend',
-                           selector: 'lastWithArtifacts'
+                           selector: 'lastWithArtifacts',
                            target: './build/resources/static',
                            fingerprintArtifacts: true])
                 }
