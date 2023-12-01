@@ -13,12 +13,12 @@ pipeline {
             }
         }
         stage('Install Dependencies') {
-           when {
-               anyOf {
-                   expression { currentBuild.previousCompletedBuild == null }
-                   changeset 'frontend/package.json'
-               }
-           }
+            when {
+                anyOf {
+                    expression { currentBuild.previousCompletedBuild == null }
+                    changeset 'frontend/package.json'
+                }
+            }
             steps {
                 dir('frontend') {
                     sh 'npm install'
@@ -26,25 +26,35 @@ pipeline {
             }
         }
         stage('Build') {
-           when {
-               anyOf {
-                   expression { currentBuild.previousCompletedBuild == null }
-                   changeset 'frontend/src/**'
-                   changeset 'frontend/angular.json'
-                   changeset 'tsconfig.app.json'
-                   changeset 'tsconfig.json'
-               }
-           }
+//             when {
+//                 anyOf {
+//                     expression { currentBuild.previousCompletedBuild == null }
+//                     changeset 'frontend/src/**'
+//                     changeset 'frontend/angular.json'
+//                     changeset 'tsconfig.app.json'
+//                     changeset 'tsconfig.json'
+//                 }
+//             }
             steps {
                 dir('frontend') {
                     sh 'npx ng build -c=production'
                 }
             }
-            post {
-                success {
-                    archiveArtifacts artifacts: 'frontend/dist/**'
+        }
+        stage('Reuse Previous Artifact') {
+            when {
+                dir('frontend/dist') {
+                    !findFiles().any()
                 }
             }
+            steps {
+                currentBuild.result = "SKIPPED"
+            }
+        }
+    }
+    post {
+        success {
+            archiveArtifacts artifacts: 'frontend/dist/**'
         }
     }
 }
