@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    parameters {
+        booleanParam(name: 'force_rebuild_frontend', defaultValue: false)
+        booleanParam(name: 'force_rebuild_backend', defaultValue: false)
+    }
     stages {
         stage ('Build App') {
             parallel {
@@ -7,7 +11,8 @@ pipeline {
                     steps {
                         build([
                             job       : 'build-frontend',
-                            wait      : true,
+                            parameters: [ booleanParam(name: 'reuse_artifacts', !parameters.force_rebuild_frontend) ],
+                            wait      : true
                         ])
                     }
                 }
