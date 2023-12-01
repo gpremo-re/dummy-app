@@ -1,0 +1,16 @@
+commit 01ea8b5ece9c7a7c2e91f1aec501358c2b89990f
+tree 06f8b263fd6ba58cacbe5b494063e5cc64268cd4
+parent 697ea91927a4283d92bf3de91ab8ca032c120994
+author Garret Premo <garretpremo@gmail.com> 2023-12-01 14:26:35 -0500
+committer Garret Premo <garretpremo@gmail.com> 2023-12-01 14:26:35 -0500
+
+    move copyArtifacts into script block
+
+
+:000000 100644 0000000000000000000000000000000000000000 49db503ad5754dedb43f68cc9ac4c8ca5cf5a1a4 A	jenkins/configuration/jobs/build/jobs/build-all/builds/4/build.xml
+:000000 100644 0000000000000000000000000000000000000000 68edecead86af206796b96a696093ca1687c67fe A	jenkins/configuration/jobs/build/jobs/build-all/builds/4/changelog8508826606704189802.xml
+:000000 100644 0000000000000000000000000000000000000000 d8899c5d3a40cab7831590a1977d13bf75bbc2d9 A	jenkins/configuration/jobs/build/jobs/build-all/builds/4/log
+:000000 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 A	jenkins/configuration/jobs/build/jobs/build-all/builds/4/log-index
+:100644 100644 5d20937c639b8a60f2a6baed9b5a64d949231d3b 7b5cb28ec9c390caabca9fc13fc7179d82deba01 M	jenkins/configuration/jobs/build/jobs/build-all/builds/permalinks
+:100644 100644 b8626c4cff2849624fb67f87cd0ad72b163671ad 7ed6ff82de6bcc2a78243fc9c54d3ef5ac14da69 M	jenkins/configuration/jobs/build/jobs/build-all/nextBuildNumber
+:100644 100644 f36ad58546e3bc2f272501d768704a948da5e8bd 45c149bc30a7771ea4499542ad124ef355ad50d8 M	jenkins/jobs/build/Jenkinsfile

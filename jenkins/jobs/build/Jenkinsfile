@@ -45,14 +45,8 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts {
-                        artifacts: 'build/libs/*.jar'
-                        target: './build/libs/'
-                    }
-                    archiveArtifacts {
-                        artifacts: 'build/resolvedMainClassName'
-                        target: './build'
-                    }
+                    archiveArtifacts artifacts: 'build/libs/*.jar', target: './build/libs/'
+                    archiveArtifacts artifacts: 'build/resolvedMainClassName', target: './build'
                 }
             }
         }
