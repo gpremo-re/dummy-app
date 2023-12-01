@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+        stage ('Build App') {
+            parallel {
+                stage ('Build Frontend') {
+                    steps {
+                        build([
+                            job       : 'build-frontend-multibranch',
+                            wait      : false,
+                        ])
+                    }
+                }
+                stage ('Build Backend') {
+                    steps {
+                        build([
+                            job       : 'build-backend-multibranch',
+                            wait      : false
+                        ])
+                    }
+                }
+            }
+        }
+    }
+}
+

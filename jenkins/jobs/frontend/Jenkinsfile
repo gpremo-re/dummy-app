@@ -26,15 +26,15 @@ pipeline {
             }
         }
         stage('Build') {
-            when {
-                anyOf {
-                    expression { currentBuild.previousCompletedBuild == null }
-                    changeset 'frontend/src/**'
-                    changeset 'frontend/angular.json'
-                    changeset 'tsconfig.app.json'
-                    changeset 'tsconfig.json'
-                }
-            }
+//            when {
+//                anyOf {
+//                    expression { currentBuild.previousCompletedBuild == null }
+//                    changeset 'frontend/src/**'
+//                    changeset 'frontend/angular.json'
+//                    changeset 'tsconfig.app.json'
+//                    changeset 'tsconfig.json'
+//                }
+//            }
             steps {
                 dir('frontend') {
                     sh 'npm run build -c=production'
