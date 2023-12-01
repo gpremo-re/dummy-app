@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options {
+        copyArtifactPermission('build-frontend', 'build-backend')
+    }
     stages {
         stage ('Build App') {
             parallel {
@@ -24,17 +27,14 @@ pipeline {
         stage ('Copy Artifacts') {
             steps {
                 script {
-                    copyArtifacts(
-                        projectName: 'build-backend',
-                        selector: artifactSelector,
-                        target: '.',
-                        fingerprintArtifacts: true
-                    )
-                    copyArtifacts(
-                        projectName: 'build-frontend',
-                        selector: artifactSelector,
-                        target: './build/resources/static'
-                    )
+                    step ([$class: 'CopyArtifact',
+                           projectName: 'build-backend',
+                           target: '.',
+                           fingerprintArtifacts: true])
+                    step ([$class: 'CopyArtifact',
+                           projectName: 'build-frontend',
+                           target: './build/resources/static',
+                           fingerprintArtifacts: true])
                 }
             }
         }
