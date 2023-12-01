@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    options {
-        copyArtifactPermission('build-frontend', 'build-backend')
-    }
     stages {
         stage ('Build App') {
             parallel {

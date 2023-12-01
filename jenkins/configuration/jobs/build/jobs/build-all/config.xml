@@ -16,6 +16,12 @@
       <projectUrl>https://github.com/gpremo-re/dummy-app.git/</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.plugins.copyartifact.CopyArtifactPermissionProperty plugin="copyartifact@722.v0662a_9b_e22a_c">
+      <projectNameList>
+        <string>build-frontend</string>
+        <string>build-backend</string>
+      </projectNameList>
+    </hudson.plugins.copyartifact.CopyArtifactPermissionProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@3812.vc3031a_b_a_c955">
     <scm class="hudson.plugins.git.GitSCM" plugin="git@5.2.1">
