@@ -1,0 +1,16 @@
+commit 697ea91927a4283d92bf3de91ab8ca032c120994
+tree 3c33b8e82748ab318dae9a0a3643e16e5e8077fd
+parent 5cd358f3bee66588ad015286bdb9241d8216e974
+author Garret Premo <garretpremo@gmail.com> 2023-12-01 14:24:29 -0500
+committer Garret Premo <garretpremo@gmail.com> 2023-12-01 14:24:29 -0500
+
+    update build jenkinsfile
+
+
+:000000 100644 0000000000000000000000000000000000000000 bd5ea6aa67e77b83735a3f516ceef36bdf799ffe A	jenkins/configuration/jobs/build/jobs/build-all/builds/3/build.xml
+:000000 100644 0000000000000000000000000000000000000000 cc079c7d0cc5cac7e0fb94cc3e1b7dd65e797a19 A	jenkins/configuration/jobs/build/jobs/build-all/builds/3/changelog8752269624146198105.xml
+:000000 100644 0000000000000000000000000000000000000000 d10aa7b49bcbdb5a0fc8c9e1f7dde4677a41ac56 A	jenkins/configuration/jobs/build/jobs/build-all/builds/3/log
+:000000 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 A	jenkins/configuration/jobs/build/jobs/build-all/builds/3/log-index
+:100644 100644 f38a22b6d5b5b4ddce9c7e9bf401a689a544569c 5d20937c639b8a60f2a6baed9b5a64d949231d3b M	jenkins/configuration/jobs/build/jobs/build-all/builds/permalinks
+:100644 100644 00750edc07d6415dcc07ae0351e9397b0222b7ba b8626c4cff2849624fb67f87cd0ad72b163671ad M	jenkins/configuration/jobs/build/jobs/build-all/nextBuildNumber
+:100644 100644 5e482be1f2c1ac9811ee8bfc4ad078b3f17a8cd5 f36ad58546e3bc2f272501d768704a948da5e8bd M	jenkins/jobs/build/Jenkinsfile

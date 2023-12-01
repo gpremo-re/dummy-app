@@ -1,0 +1,60 @@
+Started by user [8mha:////4CnjxJS+d/ZcfbKT3j/yag4zrApPKLPdWDUxtpenscYpAAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgYe/dLi1CL99IKi1Nx8AOOmWbvBAAAA[0mGarret Premo
+Checking out git https://github.com/gpremo-re/dummy-app.git into /var/jenkins_home/jobs/build/jobs/build-all/workspace@script/2fc50c7c729dfef37b9925157809542af917f2a40a9d58b239b7a49002e2477e to read jenkins/jobs/build/Jenkinsfile
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/jobs/build/jobs/build-all/workspace@script/2fc50c7c729dfef37b9925157809542af917f2a40a9d58b239b7a49002e2477e/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/gpremo-re/dummy-app.git # timeout=10
+Fetching upstream changes from https://github.com/gpremo-re/dummy-app.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+ > git fetch --tags --force --progress -- https://github.com/gpremo-re/dummy-app.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/main^{commit} # timeout=10
+Checking out Revision 697ea91927a4283d92bf3de91ab8ca032c120994 (origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 697ea91927a4283d92bf3de91ab8ca032c120994 # timeout=10
+Commit message: "update build jenkinsfile"
+ > git rev-list --no-walk 5cd358f3bee66588ad015286bdb9241d8216e974 # timeout=10
+org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+WorkflowScript: 47: Expected a step @ line 47, column 36.
+                           artifacts: 'build/libs/*.jar'
+                                      ^
+
+WorkflowScript: 48: Expected a step @ line 48, column 33.
+                           target: './build/libs/'
+                                   ^
+
+WorkflowScript: 51: Expected a step @ line 51, column 36.
+                           artifacts: 'build/resolvedMainClassName'
+                                      ^
+
+WorkflowScript: 52: Expected a step @ line 52, column 33.
+                           target: './build'
+                                   ^
+
+WorkflowScript: 46: Missing required parameter: "artifacts" @ line 46, column 21.
+                       archiveArtifacts {
+                       ^
+
+WorkflowScript: 50: Missing required parameter: "artifacts" @ line 50, column 21.
+                       archiveArtifacts {
+                       ^
+
+6 errors
+
+	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:309)
+	at org.codehaus.groovy.control.CompilationUnit.applyToPrimaryClassNodes(CompilationUnit.java:1107)
+	at org.codehaus.groovy.control.CompilationUnit.doPhaseOperation(CompilationUnit.java:624)
+	at org.codehaus.groovy.control.CompilationUnit.processPhaseOperations(CompilationUnit.java:602)
+	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:579)
+	at groovy.lang.GroovyClassLoader.doParseClass(GroovyClassLoader.java:323)
+	at groovy.lang.GroovyClassLoader.parseClass(GroovyClassLoader.java:293)
+	at org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.GroovySandbox$Scope.parse(GroovySandbox.java:163)
+	at org.jenkinsci.plugins.workflow.cps.CpsGroovyShell.doParse(CpsGroovyShell.java:190)
+	at org.jenkinsci.plugins.workflow.cps.CpsGroovyShell.reparse(CpsGroovyShell.java:175)
+	at org.jenkinsci.plugins.workflow.cps.CpsFlowExecution.parseScript(CpsFlowExecution.java:635)
+	at org.jenkinsci.plugins.workflow.cps.CpsFlowExecution.start(CpsFlowExecution.java:581)
+	at org.jenkinsci.plugins.workflow.job.WorkflowRun.run(WorkflowRun.java:335)
+	at hudson.model.ResourceController.execute(ResourceController.java:101)
+	at hudson.model.Executor.run(Executor.java:442)
+Finished: FAILURE

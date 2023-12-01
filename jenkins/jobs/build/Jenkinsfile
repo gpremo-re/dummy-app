@@ -23,17 +23,19 @@ pipeline {
         }
         stage ('Copy Artifacts') {
             steps {
-                copyArtifacts(
-                    projectName: 'build-backend',
-                    selector: artifactSelector,
-                    target: '.',
-                    fingerprintArtifacts: true
-                )
-                copyArtifacts(
-                    projectName: 'build-frontend',
-                    selector: artifactSelector,
-                    target: './build/resources/static'
-                )
+                script {
+                    copyArtifacts(
+                        projectName: 'build-backend',
+                        selector: artifactSelector,
+                        target: '.',
+                        fingerprintArtifacts: true
+                    )
+                    copyArtifacts(
+                        projectName: 'build-frontend',
+                        selector: artifactSelector,
+                        target: './build/resources/static'
+                    )
+                }
             }
         }
         stage ('Assemble Jar') {
