@@ -7,7 +7,7 @@ pipeline {
                     steps {
                         build([
                             job       : 'build-frontend-multibranch',
-                            wait      : false,
+                            wait      : true,
                         ])
                     }
                 }
@@ -15,7 +15,7 @@ pipeline {
                     steps {
                         build([
                             job       : 'build-backend-multibranch',
-                            wait      : false
+                            wait      : true
                         ])
                     }
                 }
