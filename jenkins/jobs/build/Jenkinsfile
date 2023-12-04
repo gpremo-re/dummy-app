@@ -52,6 +52,7 @@ pipeline {
 
                 // Assemble
                 sh 'gradle assemble --no-daemon'
+                sh 'ls'
             }
             post {
                 success {
