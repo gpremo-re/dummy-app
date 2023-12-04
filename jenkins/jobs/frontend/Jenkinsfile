@@ -5,8 +5,8 @@ pipeline {
         }
     }
     parameters {
-        booleanParam(name: 'reuse_artifacts', defaultValue: true, description: 'Reuse old artifact when no changes are detected')
         booleanParam(name: 'force_npm_install', defaultValue: false)
+        booleanParam(name: 'reuse_artifacts', defaultValue: true, description: 'Reuse old artifact when no changes are detected')
     }
     stages {
         stage('Checkout') {
