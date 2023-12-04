@@ -41,7 +41,7 @@ pipeline {
                     step ([$class: 'CopyArtifact',
                            projectName: 'build-backend',
                            selector: lastWithArtifacts(),
-                           target: '.',
+                           target: './build',
                            fingerprintArtifacts: true])
                     step ([$class: 'CopyArtifact',
                            projectName: 'build-frontend',
@@ -56,7 +56,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'build'
+                    archiveArtifacts artifacts: 'build/libs/*.jar'
                 }
             }
         }

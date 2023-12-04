@@ -30,7 +30,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'build, settings.gradle.kts, build.gradle.kts',
+                    archiveArtifacts artifacts: 'build/**'
                                     allowEmptyArchive: true
                 }
             }
