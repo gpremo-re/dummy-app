@@ -12,7 +12,7 @@ pipeline {
                         build([
                             job       : 'build-frontend',
                             wait      : true,
-                            parameters: [ booleanParam(name: 'reuse_artifacts', !env.force_rebuild_frontend) ]
+                            parameters: [ booleanParam(name: 'reuse_artifacts', value: !env.force_rebuild_frontend) ]
                         ])
                     }
                 }
