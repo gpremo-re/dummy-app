@@ -56,8 +56,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'build',
-                                    excludes: 'build/classes, build/generated, build/tmp, build/resources/main/static'
+                    archiveArtifacts artifacts: 'build'
                 }
             }
         }
