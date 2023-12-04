@@ -36,6 +36,7 @@ pipeline {
                 anyOf {
                     expression { params.reuse_artifacts == false }
                     expression { currentBuild.previousCompletedBuild == null }
+                    expression { fileExists('frontend/dist') == false }
                     changeset 'frontend/src/**'
                     changeset 'frontend/angular.json'
                     changeset 'tsconfig.app.json'
