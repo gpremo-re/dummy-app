@@ -11,7 +11,7 @@ pipeline {
                     steps {
                         build([
                             job       : 'build-frontend',
-                            parameters: [ booleanParam(name: 'reuse_artifacts', !parameters.force_rebuild_frontend) ],
+                            parameters: [ [$class: 'BooleanParameterValue', name: 'reuse_artifacts', value: !parameters.force_rebuild_frontend] ],
                             wait      : true
                         ])
                     }
