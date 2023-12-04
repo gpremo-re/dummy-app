@@ -26,12 +26,11 @@ pipeline {
                }
            }
             steps {
-                sh 'chmod +x ./gradlew'
-                sh './gradlew clean compileJava --no-daemon'
+                sh 'gradle clean compileJava --no-daemon'
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'build/, settings.gradle.kts, build.gradle.kts, gradlew, gradle/, .gradle/',
+                    archiveArtifacts artifacts: 'build, settings.gradle.kts, build.gradle.kts, gradlew, gradle',
                                     allowEmptyArchive: true
                 }
             }
