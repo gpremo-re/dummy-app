@@ -4,6 +4,9 @@ pipeline {
             dir 'jenkins/jobs/backend'
         }
     }
+    parameters {
+        booleanParam(name: 'reuse_artifacts', defaultValue: true, description: 'Reuse old artifact when no changes are detected')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -15,6 +18,7 @@ pipeline {
         stage('Build') {
            when {
                anyOf {
+                   expression { params.reuse_artifacts == false }
                    expression { currentBuild.previousCompletedBuild == null }
                    changeset 'build.gradle.kts'
                    changeset 'src/main/java/**'

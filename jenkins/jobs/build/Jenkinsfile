@@ -2,6 +2,7 @@ pipeline {
     agent any
     parameters {
         booleanParam(name: 'force_rebuild_frontend', defaultValue: false)
+        booleanParam(name: 'force_npm_install', defaultValue: false)
         booleanParam(name: 'force_rebuild_backend', defaultValue: false)
     }
     stages {
@@ -12,7 +13,10 @@ pipeline {
                         build([
                             job       : 'build-frontend',
                             wait      : true,
-                            parameters: [ booleanParam(name: 'reuse_artifacts', value: !env.force_rebuild_frontend) ]
+                            parameters: [
+                                booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_frontend),
+                                booleanParam(name: 'force_npm_install', value: params.force_npm_install),
+                            ]
                         ])
                     }
                 }
@@ -20,7 +24,8 @@ pipeline {
                     steps {
                         build([
                             job       : 'build-backend',
-                            wait      : true
+                            wait      : true,
+                            parameters: [ booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_backend) ]
                         ])
                     }
                 }
