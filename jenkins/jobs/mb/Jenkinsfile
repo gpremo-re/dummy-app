@@ -11,7 +11,7 @@ pipeline {
                 stage ('Build Frontend') {
                     steps {
                         build([
-                            job       : "build-mb-frontend/${env.BRANCH_NAME}",
+                            job       : "build-mb-frontend",
                             wait      : true,
                             parameters: [
                                 booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_frontend),
@@ -23,7 +23,7 @@ pipeline {
                 stage ('Build Backend') {
                     steps {
                         build([
-                            job       : "build-mb-backend/${env.BRANCH_NAME}",
+                            job       : "build-mb-backend",
                             wait      : true,
                             parameters: [ booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_backend) ]
                         ])
@@ -39,12 +39,12 @@ pipeline {
                 // Copy artifacts
                 script {
                     step ([$class: 'CopyArtifact',
-                           projectName: "build-mb-backend/${env.BRANCH_NAME}",
+                           projectName: "build-mb-backend",
                            selector: lastWithArtifacts(),
                            target: './build',
                            fingerprintArtifacts: true])
                     step ([$class: 'CopyArtifact',
-                           projectName: "build-mb-frontend/${env.BRANCH_NAME}",
+                           projectName: "build-mb-frontend",
                            selector: lastWithArtifacts(),
                            target: './build/resources/static',
                            fingerprintArtifacts: true])
@@ -52,7 +52,6 @@ pipeline {
 
                 // Assemble
                 sh 'gradle assemble --no-daemon'
-                sh 'ls'
             }
             post {
                 success {
