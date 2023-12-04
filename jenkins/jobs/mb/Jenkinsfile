@@ -11,7 +11,7 @@ pipeline {
                 stage ('Build Frontend') {
                     steps {
                         build([
-                            job       : "build-mb-frontend",
+                            job       : 'build-mb-frontend/main',
                             wait      : true,
                             parameters: [
                                 booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_frontend),
@@ -23,7 +23,7 @@ pipeline {
                 stage ('Build Backend') {
                     steps {
                         build([
-                            job       : "build-mb-backend",
+                            job       : 'build-mb-backend/main',
                             wait      : true,
                             parameters: [ booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_backend) ]
                         ])
@@ -39,12 +39,12 @@ pipeline {
                 // Copy artifacts
                 script {
                     step ([$class: 'CopyArtifact',
-                           projectName: "build-mb-backend",
+                           projectName: 'build-backend/main',
                            selector: lastWithArtifacts(),
                            target: './build',
                            fingerprintArtifacts: true])
                     step ([$class: 'CopyArtifact',
-                           projectName: "build-mb-frontend",
+                           projectName: 'build-mb-frontend/main',
                            selector: lastWithArtifacts(),
                            target: './build/resources/static',
                            fingerprintArtifacts: true])
