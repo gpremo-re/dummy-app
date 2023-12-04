@@ -1,0 +1,38 @@
+pipeline {
+    agent {
+        dockerfile {
+            dir 'jenkins/jobs/backend'
+        }
+    }
+    parameters {
+        booleanParam(name: 'reuse_artifacts', defaultValue: true, description: 'Reuse old artifact when no changes are detected')
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from Git repository
+                git branch: 'main',
+                url: 'https://github.com/gpremo-re/dummy-app.git'
+            }
+        }
+        stage('Build') {
+           when {
+               anyOf {
+                   expression { params.reuse_artifacts == false }
+                   expression { currentBuild.previousCompletedBuild == null }
+                   changeset 'build.gradle.kts'
+                   changeset 'src/main/java/**'
+                   changeset 'src/main/resources/**'
+               }
+           }
+            steps {
+                sh 'gradle clean compileJava --no-daemon'
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'build/**', allowEmptyArchive: true
+                }
+            }
+        }
+    }
+}

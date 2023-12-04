@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+    parameters {
+        booleanParam(name: 'force_rebuild_frontend', defaultValue: false)
+        booleanParam(name: 'force_npm_install', defaultValue: false)
+        booleanParam(name: 'force_rebuild_backend', defaultValue: false)
+    }
+    stages {
+        stage ('Build App') {
+            parallel {
+                stage ('Build Frontend') {
+                    steps {
+                        build([
+                            job       : 'build-mb-frontend/${env.BRANCH_NAME}',
+                            wait      : true,
+                            parameters: [
+                                booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_frontend),
+                                booleanParam(name: 'force_npm_install', value: params.force_npm_install),
+                            ]
+                        ])
+                    }
+                }
+                stage ('Build Backend') {
+                    steps {
+                        build([
+                            job       : 'build-mb-backend/${env.BRANCH_NAME}',
+                            wait      : true,
+                            parameters: [ booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_backend) ]
+                        ])
+                    }
+                }
+            }
+        }
+        stage ('Assemble Jar') {
+            agent {
+                dockerfile { dir 'jenkins/jobs/backend' }
+            }
+            steps {
+                // Copy artifacts
+                script {
+                    step ([$class: 'CopyArtifact',
+                           projectName: 'build-mb-backend/${env.BRANCH_NAME}',
+                           selector: lastWithArtifacts(),
+                           target: './build',
+                           fingerprintArtifacts: true])
+                    step ([$class: 'CopyArtifact',
+                           projectName: 'build-mb-frontend/${env.BRANCH_NAME}',
+                           selector: lastWithArtifacts(),
+                           target: './build/resources/static',
+                           fingerprintArtifacts: true])
+                }
+
+                // Assemble
+                sh 'gradle assemble --no-daemon'
+                sh 'ls'
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'build/libs/*.jar'
+                }
+            }
+        }
+    }
+}
+
