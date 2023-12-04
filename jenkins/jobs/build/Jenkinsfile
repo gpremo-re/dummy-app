@@ -51,8 +51,7 @@ pipeline {
                 }
 
                 // Assemble
-                sh 'chmod +x ./gradlew'
-                sh './gradlew assemble --no-daemon'
+                sh 'gradle assemble --no-daemon'
             }
             post {
                 success {
