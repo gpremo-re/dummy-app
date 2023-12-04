@@ -20,7 +20,7 @@ pipeline {
             when {
                 anyOf {
                     expression { params.force_npm_install == true }
-                    expression { dir('frontend/dist') { !findFiles().any() } }
+                    expression { fileExists('frontend/node_modules') == false }
                     expression { currentBuild.previousCompletedBuild == null }
                     changeset 'frontend/package.json'
                 }

@@ -5,7 +5,9 @@
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2151.ve32c9d209a_3f">
       <jobProperties/>
       <triggers/>
-      <parameters/>
+      <parameters>
+        <string>reuse_artifacts</string>
+      </parameters>
       <options/>
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
@@ -16,6 +18,15 @@
       <projectUrl>https://github.com/gpremo-re/dummy-app.git/</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.BooleanParameterDefinition>
+          <name>reuse_artifacts</name>
+          <description>Reuse old artifact when no changes are detected</description>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@3812.vc3031a_b_a_c955">
     <scm class="hudson.plugins.git.GitSCM" plugin="git@5.2.1">
