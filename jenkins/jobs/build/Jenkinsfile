@@ -9,7 +9,11 @@ pipeline {
             parallel {
                 stage ('Build Frontend') {
                     steps {
-                        build job: 'build-frontend', wait: true, parameters: [booleanParam(name: 'reuse_artifacts', value: !parameters.force_rebuild_frontend)]
+                        build([
+                            job       : 'build-frontend',
+                            wait      : true,
+                            parameters: [ string(name: 'reuse_artifacts', value: "${!parameters.force_rebuild_frontend}") ]
+                        ])
                     }
                 }
                 stage ('Build Backend') {
