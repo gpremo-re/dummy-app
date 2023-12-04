@@ -1,6 +1,6 @@
 FROM gradle:8-jdk20-alpine
 
-WORKDIR /var/jenkins_home/workspace/build/build-backend
+WORKDIR /var/jenkins_home/workspace/build/build
 
 RUN gradle init --type basic --dsl kotlin --project-name gradle
 
