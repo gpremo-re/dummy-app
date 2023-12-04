@@ -33,7 +33,7 @@ pipeline {
         }
         stage ('Assemble Jar') {
             agent {
-                dockerfile { dir 'jenkins/jobs/build' }
+                dockerfile { dir 'jenkins/jobs/backend' }
             }
             steps {
                 // Copy artifacts
