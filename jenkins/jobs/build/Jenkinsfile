@@ -18,9 +18,6 @@ pipeline {
         stage ('Build App') {
             parallel {
                 stage ('Build Frontend') {
-                    agent {
-                        dockerfile { dir 'jenkins/jobs/frontend' }
-                    }
                     stages {
                         stage ('Install Frontend Dependencies') {
                             when {
