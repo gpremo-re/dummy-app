@@ -84,9 +84,6 @@ pipeline {
             }
         }
         stage ('Assemble Jar') {
-            agent {
-                dockerfile { dir 'jenkins/jobs/backend' }
-            }
             steps {
                 // Assemble
                 sh 'gradle assemble --no-daemon'
