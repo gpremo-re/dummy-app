@@ -75,8 +75,8 @@ pipeline {
                 fileOperations([fileCopyOperation(
                     excludes: '',
                     flattenFiles: false,
-                    includes: './frontend/dist/**',
-                    targetLocation: './build/resources/static'
+                    includes: 'frontend/dist/**',
+                    targetLocation: 'build/main/resources/static'
                 )])
             }
         }
