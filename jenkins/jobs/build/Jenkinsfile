@@ -82,12 +82,17 @@ pipeline {
         }
         stage ('Assemble Jar') {
             steps {
+
+                script {
+                    echo "source_build_num=${BUILD_NUMBER}\nsource_build_time=${BUILD_TIMESTAMP}" >> build.info
+                }
+
                 // Assemble
                 sh 'gradle assemble --no-daemon'
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'build/libs/*.jar'
+                    archiveArtifacts artifacts: 'build/libs/*.jar, build.info'
                 }
             }
         }
