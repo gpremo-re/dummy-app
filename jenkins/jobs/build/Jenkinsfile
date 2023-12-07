@@ -35,7 +35,7 @@ pipeline {
                                 }
                             }
                         }
-                        stage('Build & Archive frontend') {
+                        stage('Build Frontend') {
                             when {
                                 anyOf {
                                     expression { params.force_rebuild_frontend == true }
@@ -74,14 +74,21 @@ pipeline {
                 }
             }
         }
+        stage ('Copy Frontend Build') {
+            steps {
+                fileOperations([fileCopyOperation(
+                    excludes: '',
+                    flattenFiles: false,
+                    includes: './frontend/dist/**',
+                    targetLocation: './build/resources/static'
+                )])
+            }
+        }
         stage ('Assemble Jar') {
             agent {
                 dockerfile { dir 'jenkins/jobs/backend' }
             }
             steps {
-                // Copy frontend build
-                sh 'cp ./frontend/dist ./build/resources/static'
-
                 // Assemble
                 sh 'gradle assemble --no-daemon'
             }
