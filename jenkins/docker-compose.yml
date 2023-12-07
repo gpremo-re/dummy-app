@@ -1,6 +1,6 @@
 services:
     jenkins:
-        build: .
+        image: garretpremo/jenkins-with-docker
         privileged: true
         user: root
         ports:
