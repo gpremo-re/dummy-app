@@ -1,0 +1,12 @@
+pipeline {
+    agent {
+        dockerfile { dir 'jenkins/jobs/backend' }
+    }
+    stages {
+        stage ('Clean Workspace') {
+            steps {
+                echo "hi"
+            }
+        }
+}
+
