@@ -6,9 +6,9 @@
       <jobProperties/>
       <triggers/>
       <parameters>
-          <string>force_npm_install</string>
-          <string>force_rebuild_frontend</string>
-          <string>force_rebuild_backend</string>
+        <string>force_rebuild_backend</string>
+        <string>force_rebuild_frontend</string>
+        <string>force_npm_install</string>
       </parameters>
       <options/>
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
@@ -28,10 +28,10 @@
     </hudson.plugins.copyartifact.CopyArtifactPermissionProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
-          <hudson.model.BooleanParameterDefinition>
-              <name>force_npm_install</name>
-              <defaultValue>false</defaultValue>
-          </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>force_npm_install</name>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>force_rebuild_frontend</name>
           <defaultValue>false</defaultValue>
@@ -60,7 +60,7 @@
       </userRemoteConfigs>
       <branches>
         <hudson.plugins.git.BranchSpec>
-          <name>main</name>
+          <name>parallel-experiment</name>
         </hudson.plugins.git.BranchSpec>
       </branches>
       <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>

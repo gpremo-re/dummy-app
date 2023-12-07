@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile { dir 'jenkins/jobs/backend' }
+    }
     parameters {
         booleanParam(name: 'force_rebuild_frontend', defaultValue: false)
         booleanParam(name: 'force_npm_install', defaultValue: false)
@@ -56,9 +58,6 @@ pipeline {
                     }
                 }
                 stage ('Build Backend') {
-                    agent {
-                        dockerfile { dir 'jenkins/jobs/backend' }
-                    }
                     when {
                         anyOf {
                             expression { params.force_rebuild_backend == true }
