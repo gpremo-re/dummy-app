@@ -6,27 +6,70 @@ pipeline {
         booleanParam(name: 'force_rebuild_backend', defaultValue: false)
     }
     stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from Git repository
+                git branch: 'main',
+                    url: 'https://github.com/gpremo-re/dummy-app.git'
+            }
+        }
         stage ('Build App') {
             parallel {
                 stage ('Build Frontend') {
-                    steps {
-                        build([
-                            job       : 'build-frontend',
-                            wait      : true,
-                            parameters: [
-                                booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_frontend),
-                                booleanParam(name: 'force_npm_install', value: params.force_npm_install),
-                            ]
-                        ])
+                    agent {
+                        dockerfile { dir 'jenkins/jobs/frontend' }
+                    }
+                    stages {
+                        stage ('Install Frontend Dependencies') {
+                            when {
+                                anyOf {
+                                    expression { params.force_npm_install == true }
+                                    expression { fileExists('frontend/node_modules') == false }
+                                    expression { currentBuild.previousCompletedBuild == null }
+                                    changeset 'frontend/package.json'
+                                }
+                            }
+                            steps {
+                                dir('frontend') {
+                                    sh 'npm install'
+                                }
+                            }
+                        }
+                        stage('Build & Archive frontend') {
+                            when {
+                                anyOf {
+                                    expression { params.force_rebuild_frontend == true }
+                                    expression { currentBuild.previousCompletedBuild == null }
+                                    expression { fileExists('frontend/dist') == false }
+                                    changeset 'frontend/src/**'
+                                    changeset 'frontend/angular.json'
+                                    changeset 'tsconfig.app.json'
+                                    changeset 'tsconfig.json'
+                                }
+                            }
+                            steps {
+                                dir('frontend') {
+                                    sh 'npx ng build -c=production'
+                                }
+                            }
+                        }
                     }
                 }
                 stage ('Build Backend') {
+                    agent {
+                        dockerfile { dir 'jenkins/jobs/backend' }
+                    }
+                    when {
+                        anyOf {
+                            expression { params.force_rebuild_backend == true }
+                            expression { currentBuild.previousCompletedBuild == null }
+                            changeset 'build.gradle.kts'
+                            changeset 'src/main/java/**'
+                            changeset 'src/main/resources/**'
+                        }
+                    }
                     steps {
-                        build([
-                            job       : 'build-backend',
-                            wait      : true,
-                            parameters: [ booleanParam(name: 'reuse_artifacts', value: !params.force_rebuild_backend) ]
-                        ])
+                        sh 'gradle clean compileJava --no-daemon'
                     }
                 }
             }
@@ -36,19 +79,8 @@ pipeline {
                 dockerfile { dir 'jenkins/jobs/backend' }
             }
             steps {
-                // Copy artifacts
-                script {
-                    step ([$class: 'CopyArtifact',
-                           projectName: 'build-backend',
-                           selector: lastWithArtifacts(),
-                           target: './build',
-                           fingerprintArtifacts: true])
-                    step ([$class: 'CopyArtifact',
-                           projectName: 'build-frontend',
-                           selector: lastWithArtifacts(),
-                           target: './build/resources/static',
-                           fingerprintArtifacts: true])
-                }
+                // Copy frontend build
+                sh 'cp ./frontend/dist ./build/resources/static'
 
                 // Assemble
                 sh 'gradle assemble --no-daemon'
