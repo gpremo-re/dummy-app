@@ -1,4 +1,7 @@
 ---
+app:
+    version: ${APP_VERSION}
+
 logging:
     level:
         root: INFO

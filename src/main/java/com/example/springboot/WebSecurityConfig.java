@@ -61,7 +61,7 @@ public class WebSecurityConfig {
 //            .httpBasic(Customizer.withDefaults())
             .httpBasic(httpBasic -> httpBasic.authenticationEntryPoint(new NoPopupAuthenticationEntryPoint()))
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/", "/index.html", ".webmanifest", "favicon.ico", "/*.js", "/*.css").permitAll()
+                .requestMatchers("/", "/index.html", ".webmanifest", "favicon.ico", "/*.js", "/*.css", "version").permitAll()
                 .anyRequest().authenticated()
             )
             .csrf(csrf -> csrf

@@ -13,6 +13,8 @@ public class Application {
     public static void main(String[] args) {
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
+        String appVersion = ctx.getEnvironment().getProperty("app.version");
+        System.out.println("Started Application (version " + appVersion + ")");
     }
 
     //	@Bean

@@ -1,5 +1,5 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { APP_INITIALIZER, ApplicationConfig, InjectionToken } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -8,6 +8,8 @@ import { AppInterceptor } from './app.interceptor';
 
 import { routes } from './app.routes';
 import { AuthService } from './auth.service';
+
+const APP_VERSION = new InjectionToken("APP_VERSION")
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -28,5 +30,9 @@ export const appConfig: ApplicationConfig = {
                 AuthService,
             ]
         },
+        {
+            provide: APP_VERSION,
+            useFactory: (http: HttpClient) => http.get("version")
+        }
     ]
 };

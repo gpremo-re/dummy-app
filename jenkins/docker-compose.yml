@@ -1,11 +1,13 @@
 services:
     jenkins:
-        image: garretpremo/jenkins-with-docker
+        build: .
         privileged: true
         user: root
         ports:
             - 9123:8080
             - 5000:5000
+        env_file:
+        -   .env
         container_name: jenkins
         volumes:
             - ./configuration:/var/jenkins_home

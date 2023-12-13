@@ -5,8 +5,8 @@ plugins {
     id("com.dorongold.task-tree") version "2.1.1"
 }
 
-//group = "com.example"
-//version = "0.0.1-SNAPSHOT"
+group = "com.garretpremo"
+version = "project.version"
 //sourceCompatibility = "20"
 
 //apply plugin: "war"

@@ -3,12 +3,21 @@ pipeline {
         dockerfile { dir 'jenkins/jobs/backend' }
     }
     parameters {
+        booleanParam(name: 'clean_ws', defaultValue: false)
         booleanParam(name: 'force_rebuild_frontend', defaultValue: false)
         booleanParam(name: 'force_npm_install', defaultValue: false)
         booleanParam(name: 'force_rebuild_backend', defaultValue: false)
     }
     stages {
-        stage('Checkout') {
+        stage ('Clean Workspace') {
+            when {
+                expression { params.clean_ws == true }
+            }
+            steps {
+                cleanWs()
+            }
+        }
+        stage ('Checkout') {
             steps {
                 // Checkout code from Git repository
                 git branch: 'main',
