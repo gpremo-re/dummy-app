@@ -8,6 +8,9 @@ pipeline {
         booleanParam(name: 'force_npm_install', defaultValue: false)
         booleanParam(name: 'force_rebuild_backend', defaultValue: false)
     }
+    environment {
+        backend_changes_detected = false
+    }
     stages {
         stage ('Clean Workspace') {
             when {
@@ -22,6 +25,18 @@ pipeline {
                 // Checkout code from Git repository
                 git branch: 'main',
                     url: 'https://github.com/gpremo-re/dummy-app.git'
+            }
+        }
+        stage ('Determine Steps to Skip') {
+            steps {
+                script {
+                    env.backend_changes_detected = anyOf {
+                        changeset 'build.gradle.kts'
+                        changeset 'src/main/java/**'
+                        changeset 'src/main/resources/**'
+                    }
+                }
+                sh "echo ${env.backend_changes_detected}"
             }
         }
         stage ('Build App') {
