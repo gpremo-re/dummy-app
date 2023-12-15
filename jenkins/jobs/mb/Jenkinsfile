@@ -39,7 +39,7 @@ pipeline {
                 // Copy artifacts
                 script {
                     step ([$class: 'CopyArtifact',
-                           projectName: 'build-backend/main',
+                           projectName: 'build-mb-backend/main',
                            selector: lastWithArtifacts(),
                            target: './build',
                            fingerprintArtifacts: true])
