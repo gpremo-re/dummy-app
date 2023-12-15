@@ -30,17 +30,13 @@ pipeline {
         stage ('Determine Steps to Skip') {
             steps {
                 script {
-                    var backend_changes_detected = anyOf {
+                    backend_changes_detected = anyOf {
                         changeset 'build.gradle.kts'
                         changeset 'src/main/java/**'
                         changeset 'src/main/resources/**'
                     }
-
-                    echo backend_changes_detected
-
-                    env.backend_changes_detected = backend_changes_detected
                 }
-                sh "echo ${env.backend_changes_detected}"
+                sh "echo ${backend_changes_detected}"
             }
         }
         stage ('Build App') {
